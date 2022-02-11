@@ -8,11 +8,14 @@ let http_server = http.createServer(function(req, res){
 
 	console.log(req.url);
 
+	
+	let archivo = "index.html";
+	if (req.url != "/"){
 
-	if (req.url == "/character.png"){
+		archivo = req.url.substring(1);
+	}
 
-
-		fs.readFile("character.png", function(err, data){
+		fs.readFile(archivo, function(err, data){
 			if (err){
 
 				console.log("Error");
@@ -25,21 +28,4 @@ let http_server = http.createServer(function(req, res){
 
 		});
 
-		return;
-
-	}
-
-
-	fs.readFile("index.html", function(err, data){	
-
-		if (err){
-			console.log("Error");
-			return
-		}
-
-		res.writeHead(200);
-
-		res.end(data);
-	});
-
-}).listen(1095);
+	}).listen(1095);
